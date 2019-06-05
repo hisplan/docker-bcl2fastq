@@ -23,4 +23,7 @@ then
     exit 1
 fi
 
-bs-cp -v https://basespace.illumina.com/Run/${run_id} ./data
+path_data="./data/run-${run_id}/" 
+mkdir -p ${path_data}
+
+bs-cp -v https://basespace.illumina.com/Run/${run_id} ${path_data}
