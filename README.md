@@ -51,7 +51,7 @@ bs-cp -v https://basespace.illumina.com/Run/185407224 .
 
 ## 10x Gene Expression
 
-Not working that well...
+Not working that well... `cellranger mkfastq` seems working better.
 
 ```bash
 #!/bin/bash
