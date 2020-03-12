@@ -35,4 +35,12 @@ docker run -it --rm \
     --output-dir /output \
     --minimum-trimmed-read-length 0 \
     --mask-short-adapter-reads 0 \
+    --sample-sheet /data/SampleSheet.csv \
+    --ignore-missing-bcls \
+    --ignore-missing-filter \
+    --ignore-missing-positions \
+    --ignore-missing-controls \
+    --auto-set-to-zero-barcode-mismatches \
+    --find-adapters-with-sliding-window \
+    --adapter-stringency 0.9 \
     | tee ${path_output}/run.log

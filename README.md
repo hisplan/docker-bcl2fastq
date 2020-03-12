@@ -1,6 +1,5 @@
 # docker-bcl2fastq
 
-
 ## BaseSpace Command Line Interface (CLI)
 
 https://developer.basespace.illumina.com/docs/content/documentation/cli/cli-overview
@@ -50,3 +49,32 @@ bs-cp -v https://basespace.illumina.com/Run/185407224 .
 2019-06-05 18:17:18 [1699880] WARNING: Option: '--minimum-trimmed-read-length' with value: 35 is being overwritten by the shortest non-index read length: 20
 ```
 
+## 10x Gene Expression
+
+Not working that well...
+
+```bash
+#!/bin/bash
+
+path_data="$(pwd)/AGRF_CAGRF14386_CAUC0ANXX"
+path_output="$(pwd)/test-out"
+
+mkdir -p ${path_output}
+
+docker run -it --rm \
+  -v "${path_data}":/data \
+  -v "${path_output}":/output \
+  hisplan/bcl2fastq \
+  --runfolder-dir /data \
+  --output-dir /output \
+  --sample-sheet /data/SampleSheet.csv \
+  --use-bases-mask=Y26n*,I8n,Y101n* \
+  --create-fastq-for-index-reads \
+  --minimum-trimmed-read-length=8 \
+  --mask-short-adapter-reads=8 \
+  --ignore-missing-positions \
+  --ignore-missing-controls \
+  --ignore-missing-filter \
+  --ignore-missing-bcls \
+  | tee ${path_output}/run.log
+```
